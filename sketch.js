@@ -1,32 +1,36 @@
-var canvasH = 600;
-var canvasW = 600;
+var canvasSize = 600;
+var boardSize = 500;
+var border = 50;
+var cellSize = (boardSize - 20) / 3;
+var playerX = true;
 
 function setup() {
-  createCanvas(canvasH, canvasW);
+  createCanvas(canvasSize, canvasSize);
 }
 
 function draw() {
-  background(0, 0, 10);
-  boardHash();
-
+  background(200);
+  board();
 }
 
-function boardHash() {
+function board() {
+  let boardCells = [
+    [],
+    [],
+    []
+  ];
 
-  strokeWeight(5);
-  stroke(255);
-  line(canvasW / 3, 25, canvasW / 3, canvasH - 25);
+  for (let i = 0; i < boardCells.length; i++) {
+    for (let j = 0; j < 3; j++) {
+      boardCells[i].push(new Cell(border,cellSize));
 
-  strokeWeight(5);
-  stroke(255);
-  line(canvasW * 2 / 3, 25, canvasW * 2 / 3, canvasH - 25);
+    }
+  }
 
-  strokeWeight(5);
-  stroke(255);
-  line(25, canvasW / 3, canvasH - 25, canvasW / 3);
+  for (let i = 0; i < boardCells.length; i++) {
+    for (let j = 0; j < boardCells[i].length; j++) {
+      boardCells[i][j].show(i, j);
 
-  strokeWeight(5);
-  stroke(255);
-  line(25, canvasW * 2 / 3, canvasH - 25, canvasW * 2 / 3);
-
+    }
+  }
 }
