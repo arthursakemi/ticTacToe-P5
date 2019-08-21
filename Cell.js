@@ -40,4 +40,21 @@ class Cell {
     circle(this.centerX, this.centerY, this.cellSize * 2 / 3);
   }
 
+  clicked(clickX, clickY, playerX) {
+    let x1 = this.x;
+    let x2 = x1 + this.cellSize;
+    let y1 = this.y;
+    let y2 = y1 + this.cellSize;
+    let hit = clickX > x1 && clickX < x2 && clickY > y1 && clickY < y2;
+
+    if (hit) {
+      if (playerX) {
+        return "x";
+      } else {
+        return "o"
+      }
+    }
+
+  }
+
 }

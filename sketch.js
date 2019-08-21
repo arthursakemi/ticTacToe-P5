@@ -8,20 +8,49 @@ let boardCells = [
   [],
   []
 ];
-let playerX = true;
+let boardState = [
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""]
+];
+
+let playerX = false;
 
 function setup() {
   createCanvas(canvasSize, canvasSize);
+  background(200);
+  board();
 }
 
 function draw() {
-  background(200);
-  board();
-  boardCells[0][0].drawO();
-  boardCells[0][1].drawX();
-
-
+  drawState();
 }
+
+function mousePressed() {
+  for (let i = 0; i < boardCells.length; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (boardState[i][j] == "") {
+        boardState[i][j] = boardCells[i][j].clicked(mouseX, mouseY, playerX);
+      }
+    }
+  }
+
+  playerX = !playerX;
+}
+
+function drawState() {
+  for (let i = 0; i < boardState.length; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (boardState[i][j] == "x") {
+        boardCells[i][j].drawX();
+      } else if (boardState[i][j] == "o") {
+        boardCells[i][j].drawO();
+      }
+    }
+  }
+}
+
+
 
 function board() {
   for (let i = 0; i < boardCells.length; i++) {
